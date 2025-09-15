@@ -14,12 +14,11 @@ function App() {
   ])
 
   const [title, setTitle] = useState('')
-  const bodyInputRef = useRef()
+  const [title2, setTitle2] = useState('')
   const addNewPost = (e) => {
     e.preventDefault()
     console.log(title)
-    console.log(bodyInputRef.current.value)
-
+    console.log(title2)
   }
   return (
     <div className="App">
@@ -32,8 +31,9 @@ function App() {
         />
         <MyInput
          type="text" 
-        placeholder="Описание поста"
-        ref={bodyInputRef}
+         placeholder="Описание поста"
+         value={title2}
+         onChange={(e) => setTitle2(e.target.value)}
         />
         <MyButton onClick={addNewPost}>Добавить пост</MyButton>
       </form>
