@@ -1,4 +1,6 @@
-export default function (props) {
+import MyButton from "../UI/button/MyButton";
+
+const PostItem =  (props) => {
     return (
         <div className="post">
         <div className="post__content">
@@ -8,8 +10,10 @@ export default function (props) {
           </div>
         </div>
         <div className="post__btns">
-          <button>Удалить</button>
+          <MyButton onClick={() => props.deletePost(props.post)}>Удалить</MyButton>
         </div>
       </div>
     )
 }
+
+export default PostItem;
