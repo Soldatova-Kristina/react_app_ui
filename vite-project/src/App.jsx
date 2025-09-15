@@ -1,6 +1,6 @@
 import './App.css'
 import PostList from './components/PostList/PostList'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import MyButton from './components/UI/button/MyButton'
 import MyInput from './components/UI/input/MyInput'
 
@@ -14,13 +14,11 @@ function App() {
   ])
 
   const [title, setTitle] = useState('')
-  
+  const bodyInputRef = useRef()
   const addNewPost = (e) => {
     e.preventDefault()
-   const newPost = {
-      id: Date.now(),
-      title: title,
-   }
+    console.log(bodyInputRef.current.value)
+
   }
   return (
     <div className="App">
@@ -30,10 +28,13 @@ function App() {
         placeholder="Название поста"
         value={title}
         onChange={(e) => setTitle(e.target.value)}/>
-        <MyInput type="text" 
+        <input 
+        type="text"
+        ref={bodyInputRef} />
+        {/* <MyInput type="text" 
         placeholder="Описание поста"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}/>
+        ref={bodyInputRef}
+        onChange={(e) => setTitle(e.target.value)}/> */}
         <MyButton onClick={addNewPost}>Добавить пост</MyButton>
       </form>
      <PostList posts={posts} title={"Список постов 1"}/>
