@@ -14,11 +14,16 @@ function App() {
   ])
 
   const [title, setTitle] = useState('')
-  const [title2, setTitle2] = useState('')
+  const [body, setBody] = useState('')
+
   const addNewPost = (e) => {
     e.preventDefault()
-    console.log(title)
-    console.log(title2)
+   const newTask = {
+      id: Date.now(),
+      title, 
+      body
+   }
+   setPosts([...posts, newTask])
   }
   return (
     <div className="App">
@@ -32,8 +37,8 @@ function App() {
         <MyInput
          type="text" 
          placeholder="Описание поста"
-         value={title2}
-         onChange={(e) => setTitle2(e.target.value)}
+         value={body}
+         onChange={(e) => setBody(e.target.value)}
         />
         <MyButton onClick={addNewPost}>Добавить пост</MyButton>
       </form>
