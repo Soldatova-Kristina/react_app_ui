@@ -5,13 +5,17 @@ import ClassCounter from './components/Counter/ClassCounter'
 import PostItem from './components/PostItem/PostItem'
 
 function App() {
-  const [value, setValue] = useState('Текст в  инпуте')
+  const [posts, setPosts] = useState([
+    {id: 1, title: " JavaScript", body: "description"},
+    {id: 2, title: " TypeScript", body: "description"},
+    {id: 3, title: " Redux", body: "description"},
+    {id: 4, title: " React", body: "description"}
+  ])
   return (
     <div className="App">
-      <PostItem post={{id: 1, title: " JavaScript", body: "description"}}/>
-      <PostItem post={{id: 2, title: " TypeScript", body: "description"}}/>
-      <PostItem post={{id: 3, title: " Redux", body: "description"}}/>
-      <PostItem post={{id: 4, title: " React", body: "description"}}/>
+        {posts.map(item => (
+          <PostItem post={item} key={item.id}/>
+        ))}
      </div>
   )
 }
