@@ -13,6 +13,7 @@ function App() {
   ])
   return (
     <div className="App">
+      <h1>Список постов</h1>
         {posts.map(item => (
           <PostItem post={item} key={item.id}/>
         ))}
