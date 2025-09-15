@@ -28,13 +28,12 @@ function App() {
         placeholder="Название поста"
         value={title}
         onChange={(e) => setTitle(e.target.value)}/>
-        <input 
-        type="text"
-        ref={bodyInputRef} />
-        {/* <MyInput type="text" 
+       
+        <MyInput
+         type="text" 
         placeholder="Описание поста"
         ref={bodyInputRef}
-        onChange={(e) => setTitle(e.target.value)}/> */}
+        onChange={(e) => setTitle(e.target.value)}/>
         <MyButton onClick={addNewPost}>Добавить пост</MyButton>
       </form>
      <PostList posts={posts} title={"Список постов 1"}/>
