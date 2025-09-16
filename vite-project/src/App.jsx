@@ -4,6 +4,7 @@ import { useState, useRef } from 'react'
 import MyButton from './components/UI/button/MyButton'
 import MyInput from './components/UI/input/MyInput'
 import PostForm from './components/PostForm/PostForm'
+import MySelect from './components/UI/select/MySelect'
 
 
 function App() {
@@ -27,9 +28,23 @@ function App() {
   return (
     <div className="App">
      <PostForm create={createPost}/>
+      <hr style={{margin: "20px 0"}}/> 
+      <div>
+     <MySelect
+      defaultValue="Сортировка"
+      options={[
+        {value: "title", name: "По названию"},
+        {value: "body", name: "По описанию"}
+      ]}
+      />
+     </div>
      {posts.length !== 0
-     ? <PostList deletePost={deletePost} posts={posts} title={"Список постов 1"}/>
-     : <h2 style={{textAlign: "center"}}>Список задач пуст</h2>
+     ? 
+     <PostList deletePost={deletePost} posts={posts} title={"Список постов 1"}/>
+     : 
+     <h2 style={{textAlign: "center"}}>
+     Список задач пуст
+     </h2>
      }
      </div>
   )
