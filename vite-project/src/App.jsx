@@ -21,6 +21,10 @@ function App() {
  
   const [selected, setSeceked] = useState("")
 
+  const selectPost = (e) => {
+    setSeceked(e)
+    setPosts([...posts.sort((a, b) => a[e].localeCompare(b[e]))])
+  }
 
   const deletePost = (post) => {
     setPosts(posts.filter(p => p.id !== post.id))
@@ -33,6 +37,7 @@ function App() {
       <div>
      <MySelect
       value={selected}
+      onChange={selectPost }
       defaultValue="Сортировка"
       options={[
         {value: "title", name: "По названию"},
