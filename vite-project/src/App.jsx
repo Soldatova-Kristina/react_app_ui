@@ -19,7 +19,8 @@ function App() {
     setPosts([...posts, newPost])
   }
  
-  
+  const [selected, setSeceked] = useState("")
+
 
   const deletePost = (post) => {
     setPosts(posts.filter(p => p.id !== post.id))
@@ -31,6 +32,7 @@ function App() {
       <hr style={{margin: "20px 0"}}/> 
       <div>
      <MySelect
+      value={selected}
       defaultValue="Сортировка"
       options={[
         {value: "title", name: "По названию"},
