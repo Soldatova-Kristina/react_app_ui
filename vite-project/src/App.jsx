@@ -29,7 +29,7 @@ function App() {
      <PostForm create={createPost}/>
      {posts.length !== 0
      ? <PostList deletePost={deletePost} posts={posts} title={"Список постов 1"}/>
-     : <div>Список задач пуст</div>
+     : <h2 style={{textAlign: "center"}}>Список задач пуст</h2>
      }
      </div>
   )
