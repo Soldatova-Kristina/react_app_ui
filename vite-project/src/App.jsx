@@ -1,6 +1,6 @@
 import './App.css'
 import PostList from './components/PostList/PostList'
-import { useState, useRef } from 'react'
+import { useState, useRef, useMemo } from 'react'
 import MyButton from './components/UI/button/MyButton'
 import MyInput from './components/UI/input/MyInput'
 import PostForm from './components/PostForm/PostForm'
@@ -18,20 +18,19 @@ function App() {
    const [search, setSearch] = useState("")
    const [selected, setSeceked] = useState("")
 
-   const sortPosts= (sort) => {
-   setSeceked(sort)
- }
-
-     function getSortedPosts() {
-      console.log("getSortedPosts отработала")
+   const sortedPost = useMemo(() => {
+       console.log("getSortedPosts отработала")
     if (selected) {
       return [...posts.sort((a, b) => a[selected].localeCompare(b[selected]))]
     } else {
       return posts;
     }
-  }
+   }, [selected, posts])
 
-   const sortedPost = getSortedPosts()
+
+   const sortPosts= (sort) => {
+   setSeceked(sort)
+ }
 
    const createPost = (newPost) => {
     setPosts([...posts, newPost])
