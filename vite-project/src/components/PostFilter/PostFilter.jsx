@@ -2,7 +2,7 @@ import MyButton from "../UI/button/MyButton"
 import MyInput from "../UI/input/MyInput"
 import MySelect from "../UI/select/MySelect"
 
-const PostFilter = ({search, serched, selected, sortPosts}) => {
+const PostFilter = ({filter, setFilter}) => {
 return (
      <div>
         <MyInput

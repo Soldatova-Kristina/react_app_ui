@@ -13,8 +13,7 @@ function App() {
     {id: 4, title: " React", body: "description"}
   ])
 
-   const [search, setSearch] = useState("")
-   const [selected, setSelected] = useState("")
+  const [filter, setFilter] = useState({sort: '', query: ''})
 
    const sortedPost = useMemo(() => {
        console.log("getSortedPosts отработала")
