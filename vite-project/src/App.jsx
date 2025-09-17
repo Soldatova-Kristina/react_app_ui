@@ -18,20 +18,29 @@ function App() {
    const [search, setSearch] = useState("")
    const [selected, setSeceked] = useState("")
 
-   const sortedPost = [...posts.sort((a, b) => a[selected].localeCompare(b[selected]))]
+   const sortPosts= (sort) => {
+   setSeceked(sort)
+ }
+
+     function getSortedPosts() {
+    if (selected) {
+      return [...posts.sort((a, b) => a[selected].localeCompare(b[selected]))]
+    } else {
+      return posts;
+    }
+  }
+
+   const sortedPost = getSortedPosts()
 
    const createPost = (newPost) => {
     setPosts([...posts, newPost])
   }
- 
+
   const deletePost = (post) => {
     setPosts(posts.filter(p => p.id !== post.id))
   }
 
- const sortPosts= (sort) => {
-   setSeceked(sort)
- }
-
+ 
   return (
     <div className="App">
      <PostForm create={createPost}/>
