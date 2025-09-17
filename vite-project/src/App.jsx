@@ -15,29 +15,37 @@ function App() {
     {id: 4, title: " React", body: "description"}
   ])
 
-  const createPost = (newPost) => {
+   const [search, setSearch] = useState("")
+   const [selected, setSeceked] = useState("")
+
+   const sortedPost = [...posts.sort((a, b) => a[selected].localeCompare(b[selected]))]
+
+   const createPost = (newPost) => {
     setPosts([...posts, newPost])
   }
  
-  const [selected, setSeceked] = useState("")
-
-  const selectPost = (e) => {
-    setSeceked(e)
-    setPosts([...posts.sort((a, b) => a[e].localeCompare(b[e]))])
-  }
-
   const deletePost = (post) => {
     setPosts(posts.filter(p => p.id !== post.id))
   }
+
+ const sortPosts= (sort) => {
+   setSeceked(sort)
+ }
 
   return (
     <div className="App">
      <PostForm create={createPost}/>
       <hr style={{margin: "20px 0"}}/> 
       <div>
+        <MyInput
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          placeholder="Поиск..."
+        />
+
      <MySelect
       value={selected}
-      onChange={selectPost }
+      onChange={sortPosts}
       defaultValue="Сортировка"
       options={[
         {value: "title", name: "По названию"},
@@ -47,7 +55,7 @@ function App() {
      </div>
      {posts.length !== 0
      ? 
-     <PostList deletePost={deletePost} posts={posts} title={"Список постов 1"}/>
+     <PostList deletePost={deletePost} posts={sortedPost} title={"Список постов 1"}/>
      : 
      <h2 style={{textAlign: "center"}}>
      Список задач пуст
