@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "@vitejs/plugin-react": "^5.0.2"
+  },
+  "dependencies": {
+    "react-transition-group": "^4.4.5"
   }
 }

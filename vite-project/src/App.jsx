@@ -44,7 +44,7 @@ const sortedAndSearchedPosts = useMemo(() => {
  
   return (
     <div className="App">
-      <MyButton style={{marginTop: 30}}onClick={() => setModal(true)}>
+      <MyButton style={{marginTop: 30}} onClick={() => setModal(true)}>
         Создать пост
       </MyButton>
 

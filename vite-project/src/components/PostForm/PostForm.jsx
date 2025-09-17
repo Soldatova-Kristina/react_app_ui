@@ -11,6 +11,12 @@ export default function PostForm({create}) {
     
       const addNewPost = (e) => {
         e.preventDefault()
+        
+        // Validate that both title and body are not empty
+        if (!post.title.trim() || !post.body.trim()) {
+          return;
+        }
+        
        const newPost =  {
        ...post, 
        id: Date.now(),
@@ -20,7 +26,7 @@ export default function PostForm({create}) {
       }
 
     return ( 
-          <form>
+          <form onSubmit={addNewPost}>
         <MyInput 
         type="text" 
         placeholder="Название поста"
@@ -33,7 +39,7 @@ export default function PostForm({create}) {
          value={post.body}
          onChange={e => setPost({...post, body: e.target.value})}
         />
-        <MyButton onClick={addNewPost}>Добавить пост</MyButton>
+        <MyButton type="submit">Добавить пост</MyButton>
       </form>
     )
 }
