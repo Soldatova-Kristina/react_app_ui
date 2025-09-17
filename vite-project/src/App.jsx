@@ -1,10 +1,8 @@
 import './App.css'
 import PostList from './components/PostList/PostList'
 import { useState, useRef, useMemo } from 'react'
-import MyButton from './components/UI/button/MyButton'
-import MyInput from './components/UI/input/MyInput'
 import PostForm from './components/PostForm/PostForm'
-import MySelect from './components/UI/select/MySelect'
+import PostFilter from './components/PostFilter/PostFilter'
 
 
 function App() {
@@ -16,7 +14,7 @@ function App() {
   ])
 
    const [search, setSearch] = useState("")
-   const [selected, setSeceked] = useState("")
+   const [selected, setSelected] = useState("")
 
    const sortedPost = useMemo(() => {
        console.log("getSortedPosts отработала")
@@ -33,7 +31,7 @@ const sortedAndSearchedPosts = useMemo(() => {
   }, [search, sortedPost])
 
    const sortPosts= (sort) => {
-   setSeceked(sort)
+   setSelected(sort)
  }
 
    const createPost = (newPost) => {
@@ -44,29 +42,17 @@ const sortedAndSearchedPosts = useMemo(() => {
     setPosts(posts.filter(p => p.id !== post.id))
   }
 
+  const serched = e => setSearch(e.target.value)
  
   return (
     <div className="App">
      <PostForm create={createPost}/>
       <hr style={{margin: "20px 0"}}/> 
-      <div>
-        <MyInput
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-          placeholder="Поиск..."
-        />
-
-     <MySelect
-      value={selected}
-      onChange={sortPosts}
-      defaultValue="Сортировка"
-      options={[
-        {value: "title", name: "По названию"},
-        {value: "body", name: "По описанию"}
-      ]}
-      />
-     </div>
-     {posts.length !== 0
+     <PostFilter 
+     serched = {serched}
+     selected={selected}
+     />
+     {sortedAndSearchedPosts.length !== 0
      ? 
      <PostList deletePost={deletePost} posts={sortedAndSearchedPosts} title={"Список постов 1"}/>
      : 
