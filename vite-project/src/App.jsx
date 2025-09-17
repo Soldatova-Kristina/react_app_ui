@@ -17,21 +17,17 @@ function App() {
 
    const sortedPost = useMemo(() => {
        console.log("getSortedPosts отработала")
-    if (selected) {
-      return [...posts.sort((a, b) => a[selected].localeCompare(b[selected]))]
+    if (filter.sort) {
+      return [...posts.sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]))]
     } else {
       return posts;
     }
-   }, [selected, posts])
+   }, [filter.sort, posts])
 
 const sortedAndSearchedPosts = useMemo(() => {
-    console.log("getSortedAndSearchedPosts отработала")
-    return sortedPost.filter(post => post.title.toLowerCase().includes(search.toLowerCase()))
-  }, [search, sortedPost])
+    return sortedPost.filter(post => post.title.toLowerCase().includes(filter.query.toLowerCase()))
+  }, [filter.query, sortedPost])
 
-   const sortPosts= (sort) => {
-   setSelected(sort)
- }
 
    const createPost = (newPost) => {
     setPosts([...posts, newPost])
@@ -40,25 +36,16 @@ const sortedAndSearchedPosts = useMemo(() => {
   const deletePost = (post) => {
     setPosts(posts.filter(p => p.id !== post.id))
   }
-
-  const serched = e => setSearch(e.target.value)
  
   return (
     <div className="App">
      <PostForm create={createPost}/>
       <hr style={{margin: "20px 0"}}/> 
      <PostFilter 
-     serched = {serched}
-     selected={selected}
+     filter={filter}
+     setFilter={setFilter}
      />
-     {sortedAndSearchedPosts.length !== 0
-     ? 
      <PostList deletePost={deletePost} posts={sortedAndSearchedPosts} title={"Список постов 1"}/>
-     : 
-     <h2 style={{textAlign: "center"}}>
-     Список задач пуст
-     </h2>
-     }
      </div>
   )
 }
