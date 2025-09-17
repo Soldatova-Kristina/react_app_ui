@@ -1,8 +1,9 @@
 import './App.css'
 import PostList from './components/PostList/PostList'
-import { useState, useRef, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import PostForm from './components/PostForm/PostForm'
 import PostFilter from './components/PostFilter/PostFilter'
+import MyModal from './components/MyModal/MyModal'
 
 
 function App() {
@@ -39,7 +40,9 @@ const sortedAndSearchedPosts = useMemo(() => {
  
   return (
     <div className="App">
-     <PostForm create={createPost}/>
+      <MyModal>
+        <PostForm create={createPost}/>
+      </MyModal>
       <hr style={{margin: "20px 0"}}/> 
      <PostFilter 
      filter={filter}
