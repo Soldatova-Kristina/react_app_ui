@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react'
 import PostForm from './components/PostForm/PostForm'
 import PostFilter from './components/PostFilter/PostFilter'
 import MyModal from './components/MyModal/MyModal'
+import MyButton from './components/UI/button/MyButton'
 
 
 function App() {
@@ -30,6 +31,8 @@ const sortedAndSearchedPosts = useMemo(() => {
   }, [filter.query, sortedPost])
 
 
+  const [modal, setModal] = useState(false);
+
    const createPost = (newPost) => {
     setPosts([...posts, newPost])
   }
@@ -40,7 +43,12 @@ const sortedAndSearchedPosts = useMemo(() => {
  
   return (
     <div className="App">
-      <MyModal>
+      <MyButton onClick={() => setModal(true)}>
+        Создать пост
+      </MyButton>
+
+      <MyModal
+       visible={modal} setVisible={setModal}>
         <PostForm create={createPost}/>
       </MyModal>
       <hr style={{margin: "20px 0"}}/> 
