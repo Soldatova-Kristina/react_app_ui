@@ -27,6 +27,10 @@ function App() {
     }
    }, [selected, posts])
 
+const sortedAndSearchedPosts = useMemo(() => {
+    console.log("getSortedAndSearchedPosts отработала")
+    return sortedPost.filter(post => post.title.toLowerCase().includes(search.toLowerCase()))
+  }, [search, sortedPost])
 
    const sortPosts= (sort) => {
    setSeceked(sort)
@@ -64,7 +68,7 @@ function App() {
      </div>
      {posts.length !== 0
      ? 
-     <PostList deletePost={deletePost} posts={sortedPost} title={"Список постов 1"}/>
+     <PostList deletePost={deletePost} posts={sortedAndSearchedPosts} title={"Список постов 1"}/>
      : 
      <h2 style={{textAlign: "center"}}>
      Список задач пуст
