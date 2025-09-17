@@ -35,6 +35,7 @@ const sortedAndSearchedPosts = useMemo(() => {
 
    const createPost = (newPost) => {
     setPosts([...posts, newPost])
+    setModal(false)
   }
 
   const deletePost = (post) => {
