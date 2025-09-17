@@ -17,14 +17,7 @@ function App() {
 
   const [filter, setFilter] = useState({sort: '', query: ''})
 
-   const sortedPost = useMemo(() => {
-       console.log("getSortedPosts отработала")
-    if (filter.sort) {
-      return [...posts.sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]))]
-    } else {
-      return posts;
-    }
-   }, [filter.sort, posts])
+  
 
 const sortedAndSearchedPosts = useMemo(() => {
     return sortedPost.filter(post => post.title.toLowerCase().includes(filter.query.toLowerCase()))

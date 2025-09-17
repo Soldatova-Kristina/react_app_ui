@@ -6,20 +6,19 @@ const PostList = ({ posts, title, deletePost }) => {
   const nodeRefs = useRef({});
 
   useEffect(() => {
-    const aliveIds = new Set(posts.map(p => String(p.id)));
-    for (const key of Object.keys(nodeRefs.current)) {
-      if (!aliveIds.has(key)) delete nodeRefs.current[key];
-    }
-  }, [posts]);
-
-  if (!posts.length) {
-    return (
-      <h2 style={{textAlign: "center"}}>
-        Список задач пуст
-      </h2>
-    )
+  const aliveIds = new Set(posts.map(p => String(p.id)));
+  for (const key of Object.keys(nodeRefs.current)) {
+    if (!aliveIds.has(key)) delete nodeRefs.current[key];
   }
+}, [posts]);
 
+   if (!posts.length) {
+     return (<h2 style={{textAlign: "center"}}>
+     Список задач пуст
+     </h2>
+     
+  )} 
+  
   return (
     <div>
       <h1 style={{ color: 'blue', textAlign: 'center' }}>{title}</h1>
