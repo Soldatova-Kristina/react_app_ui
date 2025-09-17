@@ -23,6 +23,7 @@ function App() {
  }
 
      function getSortedPosts() {
+      console.log("getSortedPosts отработала")
     if (selected) {
       return [...posts.sort((a, b) => a[selected].localeCompare(b[selected]))]
     } else {
