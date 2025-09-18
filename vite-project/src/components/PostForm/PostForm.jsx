@@ -12,7 +12,6 @@ export default function PostForm({create}) {
       const addNewPost = (e) => {
         e.preventDefault()
         
-        // Validate that both title and body are not empty
         if (!post.title.trim() || !post.body.trim()) {
           return;
         }
