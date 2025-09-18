@@ -21,7 +21,7 @@ const PostList = ({ posts, title, deletePost }) => {
   
   return (
     <div>
-      <h1 style={{ color: 'blue', textAlign: 'center' }}>{title}</h1>
+      <h1 style={{ color: 'black', textAlign: 'center' }}>{title}</h1>
       <TransitionGroup>
         {posts.map((item, index) => {
           if (!nodeRefs.current[item.id]) {

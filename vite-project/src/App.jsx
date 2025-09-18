@@ -48,7 +48,7 @@ function App() {
      filter={filter}
      setFilter={setFilter}
      />
-     <PostList deletePost={deletePost} posts={sortedAndSearchedPosts} title={"Список постов 1"}/>
+     <PostList deletePost={deletePost} posts={sortedAndSearchedPosts} title={"Список постов"}/>
      </div>
   )
 }

@@ -1,10 +1,10 @@
-const MySelect = ({options, defoultValue, value, onChange}) => {
+const MySelect = ({options, defaultValue, value, onChange}) => {
     return (
         <>
       <select 
       value={value}
-      onChange={e => onChange(e.target.value)}>
-        <option disabled value={defoultValue}>Сортировка</option>
+      onChange={onChange}>
+        <option disabled value="">{defaultValue}</option>
         {
             options.map(option => 
             <option key={option.value} value={option.value}>
