@@ -1,0 +1,8 @@
+.pagination {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
