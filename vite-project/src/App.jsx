@@ -1,7 +1,7 @@
 import './App.css'
 import axios from 'axios'
 import PostList from './components/PostList/PostList'
-import { useState} from 'react'
+import {useState, useEffect} from 'react'
 import PostForm from './components/PostForm/PostForm'
 import PostFilter from './components/PostFilter/PostFilter'
 import MyModal from './components/MyModal/MyModal'
@@ -14,6 +14,10 @@ function App() {
   const [modal, setModal] = useState(false);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
 
+   useEffect (() => {
+    getPosts()
+  }, [])
+
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
     setModal(false)
@@ -23,11 +27,16 @@ function App() {
     setPosts(posts.filter(p => p.id !== post.id))
   }
 
+
+
   async function getPosts ()  {
     const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
     setPosts(response.data)
   }
  
+   
+
+
   return (
     <div className="App">
 
