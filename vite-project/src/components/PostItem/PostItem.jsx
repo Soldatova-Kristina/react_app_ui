@@ -1,4 +1,4 @@
-import MyButton from "../UI/button/MyButton";
+import MyButton from "../../UI/button/MyButton";
 
 const PostItem =  (props) => {
     return (

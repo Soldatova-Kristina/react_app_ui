@@ -1,6 +1,6 @@
-import MyInput from "../UI/input/MyInput"
+import MyInput from "../../UI/input/MyInput"
 import {useState} from 'react'
-import MyButton from "../UI/button/MyButton"
+import MyButton from "../../UI/button/MyButton"
 
 export default function PostForm({create}) {
 

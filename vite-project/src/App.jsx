@@ -5,8 +5,8 @@ import {useState, useEffect} from 'react'
 import PostForm from './components/PostForm/PostForm'
 import PostFilter from './components/PostFilter/PostFilter'
 import MyModal from './components/MyModal/MyModal'
-import MyButton from './components/UI/button/MyButton'
-import {usePosts} from './components/hooks/usePosts'
+import MyButton from './UI/button/MyButton'
+import {usePosts} from './hooks/usePosts'
 
 function App() {
   const [posts, setPosts] = useState([])
