@@ -1,5 +1,4 @@
-import './App.css'
-import axios from 'axios'
+import './App.css' 
 import PostList from './components/PostList/PostList'
 import {useState, useEffect} from 'react'
 import PostForm from './components/PostForm/PostForm'
@@ -8,6 +7,7 @@ import MyModal from './components/MyModal/MyModal'
 import MyButton from './UI/button/MyButton'
 import {usePosts} from './hooks/usePosts'
 import PostService from './API/PostService'
+import Loader from './UI/Loader/Loader'
 
 function App() {
   const [posts, setPosts] = useState([])
@@ -31,11 +31,11 @@ function App() {
 
   async function getPosts () {
     setIsPostLoading(true);
-    setTimeout (async () => {
-    const posts= await PostService.getAll()
+    setTimeout( async() => {
+   const posts= await PostService.getAll()
     setPosts(posts)
     setIsPostLoading(false)
-    }, 2000)
+    }, 3000)  
   }
  
   return (
@@ -55,7 +55,7 @@ function App() {
      setFilter={setFilter}
      />
    {isPostLoading 
-     ? <h1 style={{textAlign: "center"}}>Загрузка постов...</h1>
+     ? <div style={{display: "flex", justifyContent: "center", marginTop: 50}}><Loader /></div>
      : <PostList deletePost={deletePost} posts={sortedAndSearchedPosts} title={"Список постов"} /> 
 }
 </div>
