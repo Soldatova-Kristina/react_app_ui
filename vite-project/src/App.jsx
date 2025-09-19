@@ -9,18 +9,21 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [isAuth, setIsAuth] = useState(false)
-  
+  const [isLoading, setIsLoading] = useState(true)
+
   useEffect(() => {
-    // Check if user was previously authenticated
     const authStatus = localStorage.getItem('auth')
     if (authStatus === 'true') {
       setIsAuth(true)
     }
+    setIsLoading(false)
   }, [])
+
   return (
     <AuthContext.Provider value={{
       isAuth,
-      setIsAuth
+      setIsAuth,
+      isLoading
     }}>
       <Router>
       <NavBar />

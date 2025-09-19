@@ -3,11 +3,15 @@ import { privateRoutes, publicRoutes } from "../../router";
 import Login from "../../pages/Login";
 import { useContext } from "react";
 import { AuthContext } from "../../context";
+import Loader from "../../UI/Loader/Loader";
 
 const AppRouter = () => {
 
-const {isAuth} = useContext(AuthContext)
+const {isAuth, isLoading} = useContext(AuthContext)
 
+if (isLoading) {
+    return <Loader />
+}
   return (
    <Routes>
   {isAuth
