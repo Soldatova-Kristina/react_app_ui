@@ -24,21 +24,28 @@ function Posts() {
   const { pages } = usePagination(totalPages)
   const lastElementRef = useRef()
 
-  const [getPosts, isPostLoading, postError] = useFetching( async ()=> {
-      const response = await PostService.getAll(limit, page)
-      setPosts([...posts, ...response.data])
-      const totalCount = response.headers['x-total-count'];
-      setTotalPages(getPageCount(totalCount, limit))
+  const [fetchPosts, isPostLoading, postError] = useFetching( async () => {
+    const response = await PostService.getAll(limit, page)
+    setPosts(prev => [...prev, ...response.data])
+    const totalCount = response.headers['x-total-count']
+    setTotalPages(getPageCount(totalCount, limit))
   })
 
+  // наблюдатель: увеличиваем страницу
   useObserver(lastElementRef, page < totalPages, isPostLoading, () => {
-    setPage(page + 1)
+    setPage(prev => prev + 1)
   })
 
-   useEffect(() => {
-    getPosts(limit, page)
-  }, [page]) 
+  // грузим посты при первой загрузке и при смене page
+  useEffect(() => {
+    fetchPosts()
+  }, [page, limit]) 
 
+  // если меняем лимит — сбрасываем посты и страницу
+  useEffect(() => {
+    setPosts([])
+    setPage(1)
+  }, [limit])
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
@@ -49,43 +56,39 @@ function Posts() {
     setPosts(posts.filter(p => p.id !== post.id))
   }
 
-  const changePage = (newPage) => {
-    setPage(newPage)
-  }
-
- 
- 
   return (
     <div className="App">
-
       <MyButton style={{marginTop: 30}} onClick={() => setModal(true)}>
         Создать пост
       </MyButton>
 
-      <MyModal
-       visible={modal} setVisible={setModal}>
+      <MyModal visible={modal} setVisible={setModal}>
         <PostForm create={createPost}/>
       </MyModal>
+
       <hr style={{margin: "20px 0"}}/> 
-     <PostFilter 
-     filter={filter}
-     setFilter={setFilter}
-     />
-     {postError && 
-     <h1>Произошла ошибка ${postError}</h1>
-      }
-     <PostList deletePost={deletePost} posts={sortedAndSearchedPosts} title={"Список постов"} />
-     <div ref={lastElementRef}></div>
-     {isPostLoading && 
-     <div style={{display: "flex", justifyContent: "center", marginTop: 50}}><Loader /></div>
-     }
-         
-         <Pagination 
-           pages={pages}
-           currentPage={page}
-           onPageChange={changePage}
-         />
+
+      <PostFilter filter={filter} setFilter={setFilter} />
+
+      <select value={limit} onChange={e => setLimit(Number(e.target.value))}>
+        <option value={5}>5</option>
+        <option value={10}>10</option>
+        <option value={25}>25</option>
+      </select>
+
+      {postError && <h1>Произошла ошибка ${postError}</h1>}
+
+      <PostList deletePost={deletePost} posts={sortedAndSearchedPosts} title={"Список постов"} />
+
+      <div ref={lastElementRef} style={{ height: 20 }} />
+
+      {isPostLoading && (
+        <div style={{display: "flex", justifyContent: "center", marginTop: 50}}>
+          <Loader />
+        </div>
+      )}
     </div>
   )
 }
-export default Posts;
+
+export default Posts
