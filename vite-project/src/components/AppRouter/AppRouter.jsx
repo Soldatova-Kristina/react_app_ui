@@ -1,20 +1,15 @@
-import Posts from '../../pages/Posts.jsx';
-import About from '../../pages/About.jsx';
-import Error from '../../pages/Error.jsx';
-
-import {Routes, Route, Navigate} from "react-router-dom";
-import PostIdPage from '../../pages/PostIdPage.jsx';
+import { Routes, Route, Navigate } from "react-router-dom";
+import { routes } from  "../../router";
 
 const AppRouter = () => {
   return (
- <Routes>
-        <Route exact path="/posts" element={<Posts />} />
-        <Route exact path="/posts/:id" element={<PostIdPage />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/error" element={<Error />} />
-        <Route path="*" element={<Navigate to="/error" replace />} />
-      </Routes>
-  )
-}
+    <Routes>
+      {routes.map((r, i) => (
+        <Route key={i} path={r.path} element={r.element} />
+      ))}
+      <Route path="*" element={<Navigate to="/error" replace />} />
+    </Routes>
+  );
+};
 
 export default AppRouter;
